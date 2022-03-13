@@ -9,7 +9,13 @@ function soloNumeros(array) {
   // soloNumeros([1, 'Henry', 2]) debe retornar [1, 2]
 
   // Tu código aca:
-
+ let numeros = [];
+  for (let i of array){
+   if (typeof(i) == 'number'){
+      numeros.push(i)
+   }
+ }  
+ return numeros;
 }
 
 function sumaTodos(array) {
@@ -20,7 +26,11 @@ function sumaTodos(array) {
   // Nota: Los numeros estan ordenados de menor a mayor.
 
   // Tu código aca:
-  
+  let total = array[0];
+  for (let i = array[0] + 1; i <= array[1]; i++) {
+   total= total + i;
+  }
+  return total;
 }
 
 function checkInventario(inventario, item) {
@@ -42,7 +52,12 @@ function checkInventario(inventario, item) {
   // checkInventario(inventario, 'tenedor') devuelve => 6
 
   // Tu código aca:
-  
+  for (let i in inventario) {
+    if (item == inventario[i].nombre){
+      return (inventario[i].cantidad);
+    }
+  }
+return 0; 
 }
 
 function numeroSimetrico(num) {
@@ -53,11 +68,15 @@ function numeroSimetrico(num) {
   // numeroSimetrico(11711) devuelve true
 
   // Tu código:
-
+  let n = Number(num.toString().split('').reverse().join(''))
+    if (num === n) {
+    return true;
+  }
+    return false;
 }
 
 function index() {
-  // Escribi una función encontraIndex en el prototipo de Arrays,
+  // Escribir una función encontraIndex en el prototipo de Arrays,
   // que recibe un elemento.
   // La function tiene que devolver el indice (index) del primer elemento que coincida con el pasado como parametro dentro del array.
   // Si el elemento se repite dentro del Array, este devuelve el indice del Primer elemento.
@@ -70,8 +89,17 @@ function index() {
   // numeros.encontraIndex(23) debe devolver -1 ya que ese elemento no existe en ese array.
 
   // Tu código aca:
+  Array.prototype.encontraIndex = function(num){
+    for(let i = 0; i < this.length; i++){
+        if (num == this[i]){
+            return i;
+        }
+    }
+    return -1;
+}
+}
 
-};
+
 
 
 
@@ -80,35 +108,43 @@ function crearClasePersona() {
   // el constructor debe recibir:
   // nombre (string) , edad (integer) , hobbies (array de strings) , amigos (array de objetos)
   class Persona {
-    constructor() {
-
+    constructor(nombre, edad, hobbies, amigos) {
+       this.nombre = nombre;
+       this.edad = edad;
+       this.hobbies= hobbies;
+       this.amigos = amigos;
     }
 
     addFriend(nombre, edad) {
       // el metodo addFriend recibe un string nombre y un entero edad y debe agregar un objeto:
       // { nombre: nombre, edad: edad} al arreglo de amigos de la persona.
       // no debe retornar nada.
-      
+      this.amigos.push({nombre: nombre, edad: edad});
     }
 
     addHobby(hobby) {
       // este método debe agregar un hobby (hobby) al arreglo de hobbies de la persona.
       // no debe retornar nada.
-
+     this.hobbies.push(hobby);
     }
     getFriends() {
       // Escribe una función que retorne un arreglo con sólo los nombres del arreglo de amigos
       // de la persona.
       // Ej:
       // persona.getFriends() // retorna ['toni', 'Leo', 'Manu']
-
+      let array= []  
+      this.amigos.map((obj) => array.push(obj['nombre']))
+      return array; 
+        
+      
     }
 
     getHobbies() {
       // Escribe una función que retorne un arreglo con los hobbies de la persona
       // Ej:
       // persona.getHobbies() // retorna ['correr', 'dormir', 'nadar']
-
+      let e = this.hobbies;
+      return e;
     }
 
     getPromedioEdad() {
@@ -124,9 +160,16 @@ function crearClasePersona() {
       //   }]
       // }
       // persona.getPromedioEdad() // retorna 29
-
-    }
-
+    
+      let array= []  
+      this.amigos.map((obj) => array.push(obj['edad']))
+      let e = array + array / this.amigos.amigos.length; 
+      return e;
+        
+    
+ 
+  
+  }
   };
 
   return Persona;
@@ -147,7 +190,18 @@ function cuantosRepetidos(array, elemento) {
 
   // Tu código aca:
 
+  let repetido = 0;
+  for(let i = 0;i< array.length;i++){
+      for(let j in array[i]){
+          if(elemento == array[i][j]){
+              repetido = repetido + 1;
+          }
+      }
+  }
+  return repetido;
 }
+
+
 
 // No modifiques nada debajo de esta linea
 //
